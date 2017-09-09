@@ -158,7 +158,7 @@ my $now = time();
 
 foreach my $link (@roots) {
     next if $link eq "." || $link eq "..";
-    my $path = "/nix/store/$link";
+    my $path = "/cvmfs/lhcbdev.cern.ch/nix/v0.1/store/$link";
     if (!defined $roots{$path}) {
         # Don't delete roots that are less than a day old, to prevent
         # a race where hydra-eval-jobs has added a root but

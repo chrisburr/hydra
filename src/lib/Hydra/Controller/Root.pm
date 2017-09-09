@@ -445,7 +445,7 @@ sub serveLogFile {
 sub log :Local :Args(1) {
     my ($self, $c, $drvPath) = @_;
 
-    $drvPath = "/nix/store/$drvPath";
+    $drvPath = "/cvmfs/lhcbdev.cern.ch/nix/v0.1/store/$drvPath";
 
     my $tail = $c->request->params->{"tail"};
 
