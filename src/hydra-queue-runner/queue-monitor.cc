@@ -1,6 +1,7 @@
 #include "state.hh"
 #include "build-result.hh"
 #include "globals.hh"
+#include "parsed-derivations.hh"
 
 #include <cstring>
 
@@ -428,8 +429,9 @@ Step::ptr State::createStep(ref<Store> destStore,
        it's not runnable yet, and other threads won't make it
        runnable while step->created == false. */
     step->drv = readDerivation(drvPath);
+    parsedDrv = std::make_unique<ParsedDerivation>(drvPath, *step->drv);
 
-    step->preferLocalBuild = step->drv.willBuildLocally();
+    step->preferLocalBuild = parsedDrv.willBuildLocally();
     step->isDeterministic = get(step->drv.env, "isDetermistic", "0") == "1";
 
     step->systemType = step->drv.platform;
